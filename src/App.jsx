@@ -8,11 +8,11 @@ const updater = (state, action) => {
   switch(action.type) {
     case 'addTask':
       return [...state, action.payload]; // state.push(action.payload);
-    case 'deleteTask':
-      // return [...state(0, 3), ...state(5, end)]
+      case 'delete':
+        return state.filter(task => task.id !== action.payload);
+      default:
+        throw new Error('Undefined action type: ' + action.type);
   }
-
-  throw new Error('Undefined action type');
 }
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
       <Button>All</Button>
       <Button>Done</Button>
       <Button>Remainded</Button>
-      <Checklist tasks={tasks}/>
+      <Checklist tasks={tasks} dispatch={dispatchTask}/>
     </>
   );
 }
